@@ -6,7 +6,13 @@ namespace :scaa do
     task :import do
       parser = Scaa::Campus::Parser.new
       parser.parse!
-      pp parser.results
+
+      return if parser.results.empty?
+
+      Campus.transaction do
+        Campus.delete_all
+        parser.results.each { |result| Campus.create! result }
+      end
     end
   end
 end
