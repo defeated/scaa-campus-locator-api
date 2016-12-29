@@ -12,7 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20161228014942) do
 
-  create_table "campuses", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "campuses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.string   "url",        limit: 1024

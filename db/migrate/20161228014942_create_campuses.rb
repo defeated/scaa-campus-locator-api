@@ -1,6 +1,8 @@
 class CreateCampuses < ActiveRecord::Migration[5.0]
   def change
-    create_table :campuses do |t|
+    enable_extension 'uuid-ossp'
+
+    create_table :campuses, id: :uuid do |t|
       t.string :name, nullable: false
       t.string :address, nullable: false
       t.string :url, limit: 1024
