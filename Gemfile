@@ -9,6 +9,7 @@ end
 gem 'rails', '~> 5.0.1'
 gem 'pg'
 gem 'puma', '~> 3.0'
+gem 'jsonapi-resources'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
