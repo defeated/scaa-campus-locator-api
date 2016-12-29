@@ -1,4 +1,4 @@
-class CampusResource < JSONAPI::Resource
+class Api::V1::CampusResource < JSONAPI::Resource
   immutable
 
   key_type :uuid
