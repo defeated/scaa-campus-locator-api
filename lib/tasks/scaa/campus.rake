@@ -1,4 +1,3 @@
-require 'pp'
 require 'scaa/campus/parser'
 
 namespace :scaa do
