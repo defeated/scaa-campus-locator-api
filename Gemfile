@@ -13,6 +13,10 @@ gem 'jsonapi-resources'
 
 gem 'geocoder'
 
+gem 'elasticsearch', '~> 5.0.0'
+gem 'elasticsearch-model', '~> 0.1.9'
+gem 'elasticsearch-rails', '~> 0.1.9'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 

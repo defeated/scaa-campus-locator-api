@@ -1,5 +1,6 @@
 require 'scaa/campus/importer'
 require 'scaa/campus/geocoder'
+require 'scaa/campus/indexer'
 
 namespace :scaa do
   namespace :campus do
@@ -11,6 +12,10 @@ namespace :scaa do
       Scaa::Campus::Geocoder.new.geocode!
     end
 
-    task rebuild: %w(import geocode)
+    task :index do
+      Scaa::Campus::Indexer.new.index!
+    end
+
+    task rebuild: %w(import geocode index)
   end
 end
