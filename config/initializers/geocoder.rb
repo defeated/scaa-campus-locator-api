@@ -1,3 +1,3 @@
 Geocoder.configure lookup: :google,
                    use_https: true,
-                   api_key: ENV['GEOCODING_API_KEY']
+                   api_key: Rails.application.secrets.geocoding_api_key
