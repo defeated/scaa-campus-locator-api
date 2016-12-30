@@ -4,15 +4,15 @@ require 'scaa/campus/indexer'
 
 namespace :scaa do
   namespace :campus do
-    task :import do
+    task import: :environment do
       Scaa::Campus::Importer.new.import!
     end
 
-    task :geocode do
+    task geocode: :environment do
       Scaa::Campus::Geocoder.new.geocode!
     end
 
-    task :index do
+    task index: :environment do
       Scaa::Campus::Indexer.new.index!
     end
 
