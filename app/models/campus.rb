@@ -1,6 +1,9 @@
 class Campus < ApplicationRecord
   before_validation :normalize_url
 
+  validates :name, presence: true
+  validates :address, presence: true
+
   ### Elasticsearch ###################################################
   include Elasticsearch::Model
 
