@@ -11,6 +11,8 @@ gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'jsonapi-resources'
 
+gem 'geocoder'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
