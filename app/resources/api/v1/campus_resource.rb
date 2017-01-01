@@ -1,15 +1,17 @@
-class Api::V1::CampusResource < JSONAPI::Resource
-  immutable
+module Api
+  module V1
+    class CampusResource < JSONAPI::Resource
+      immutable
+      key_type :uuid
+      attributes :name, :address, :url, :latitude, :longitude
 
-  key_type :uuid
+      def latitude
+        @model.latitude.to_f
+      end
 
-  attributes :name, :address, :url, :latitude, :longitude
-
-  def latitude
-    @model.latitude.to_f
-  end
-
-  def longitude
-    @model.longitude.to_f
+      def longitude
+        @model.longitude.to_f
+      end
+    end
   end
 end
