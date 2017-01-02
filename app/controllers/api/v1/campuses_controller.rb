@@ -41,7 +41,7 @@ module Api
         resources  = records.map do |record|
           # find result distance
           result = results.find { |item| item.id == record.id }
-          distance = "#{result[:sort].first.round}#{unit}"
+          distance = "#{result[:sort].first.round}#{uom}"
           klass.new record, distance: distance
         end
         serializer = JSONAPI::ResourceSerializer.new klass
@@ -54,9 +54,9 @@ module Api
 
       def search_params
         @search_params ||= params.permit(%i(pin dist uom)).tap do |hash|
-          hash[:pin]  || 'Boston, MA, US'
-          hash[:dist] || '50'
-          hash[:uom]  || 'mi'
+          hash[:pin]  ||= 'Boston, MA, US'
+          hash[:dist] ||= '50'
+          hash[:uom]  ||= 'mi'
         end
       end
     end
