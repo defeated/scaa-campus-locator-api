@@ -2,10 +2,16 @@ module Api
   module V1
     class CampusesController < JSONAPI::ResourceController
       def search
-        # default to lat, lon for Boston, MA, US
-        spot = params[:spot] || [42.3600825, -71.0588801].join(',')
-        dist = params[:dist] || '50'
-        unit = params[:unit] || 'mi'
+        pin   = search_params[:pin]
+        dist  = search_params[:dist]
+        uom   = search_params[:uom]
+
+        geo = Geocoder.search(pin).first
+        if geo
+          point = geo.coordinates.join ','
+        else
+          return head :bad_request
+        end
 
         # FIXME: extract to command object
         q = ::Campus.__elasticsearch__.search(
@@ -13,17 +19,17 @@ module Api
             bool: {
               filter: {
                 geo_distance: {
-                  distance: "#{dist}#{unit}",
-                  location: spot
+                  distance: "#{dist}#{uom}",
+                  location: point
                 }
               }
             }
           },
           sort: {
             _geo_distance: {
-              location: spot,
+              location: point,
               order: 'asc',
-              unit: unit
+              unit: uom
             }
           }
         )
@@ -42,6 +48,16 @@ module Api
         collection = serializer.serialize_to_hash resources
 
         render json: collection
+      end
+
+      private
+
+      def search_params
+        @search_params ||= params.permit(%i(pin dist uom)).tap do |hash|
+          hash[:pin]  || 'Boston, MA, US'
+          hash[:dist] || '50'
+          hash[:uom]  || 'mi'
+        end
       end
     end
   end
