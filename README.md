@@ -16,7 +16,8 @@ Docs at http://docs.scaacampuslocator.apiary.io/
 2. Google geocoding API to get address latitude & longitude.
   [code](lib/scaa/campus/geocoder.rb)
 3. Elasticsearch to search campuses by distance.
-  [code](lib/scaa/campus/indexer.rb)
+  [code](lib/scaa/campus/indexer.rb) -
+  [code](app/models/campus.rb)
 4. Rake task runs each night. `rake scaa:campus:rebuild`
   [code](lib/tasks/scaa/campus.rake)
 5. Ruby 2.4 + Rails 5 API
