@@ -1,0 +1,104 @@
+FORMAT: 1A
+HOST: http://scaa-campus-locator.herokuapp.com/
+
+# SCAA Campus API
+
+A simple API allowing users to search for SCAA Campuses around the US.
+
+## Campuses Collection [/api/v1/campuses]
+
+Data for US SCAA Campus locations.
+
+### List All Campuses [GET]
+
+Returns all campuses in the database.
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "00000000-aaaa-1111-bbbb-999999999999",
+                    "type": "campuses",
+                    "links": {
+                        "self": "http://example.com/api/v1/campuses/00000000-aaaa-1111-bbbb-999999999999"
+                    },
+                    "attributes": {
+                        "name": "Coffee Lab",
+                        "address": "Boston, MA, US",
+                        "url": "http://example.com",
+                        "latitude": 42.3600825,
+                        "longitude": -71.0588801
+                    }
+                }
+            ]
+        }
+
+## Campus Entity [/api/v1/campuses/{id}]
+
+Data for a selected campus location.
+
++ Parameters
+    + id: `00000000` (string, required) - unique campus ID (UUID)
+
+### Show Campus [GET]
+
+Get a specific US SCAA Campus by ID.
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "id": "00000000-aaaa-1111-bbbb-999999999999",
+                "type": "campuses",
+                "links": {
+                    "self": "http://example.com/api/v1/campuses/00000000-aaaa-1111-bbbb-999999999999"
+                },
+                "attributes": {
+                    "name": "Coffee Lab",
+                    "address": "Boston, MA, US",
+                    "url": "http://example.com",
+                    "latitude": 42.3600825,
+                    "longitude": -71.0588801
+                }
+            }
+        }
+
+## Campus Search [/api/v1/campuses/search{?pin,dist,uom}]
+
++ Parameters
+    + pin: `02139` (string, required) - An address or zipcode.
+    + dist (number, optional) - Radius to search.
+        + Default: `50`
+    + uom (enum[string], optional) - Distance unit of measure.
+        + Default: `mi`
+        + Members
+            + `mi`
+            + `km`
+
+### Search Campuses [GET]
+
+Search for campuses within range of an address, zipcode, etc.
+Results sorted by nearest to farthest.
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": "00000000-aaaa-1111-bbbb-999999999999",
+                    "type": "campuses",
+                    "links": {
+                        "self": "http://example.com/api/v1/campuses/00000000-aaaa-1111-bbbb-999999999999"
+                    },
+                    "attributes": {
+                        "name": "Coffee Lab",
+                        "address": "Boston, MA, US",
+                        "url": "http://example.com",
+                        "latitude": 42.3600825,
+                        "longitude": -71.0588801,
+                        "distance": "5mi"
+                    }
+                }
+            ]
+        }
