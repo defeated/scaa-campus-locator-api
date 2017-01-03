@@ -13,7 +13,7 @@ module Api
           return head :bad_request
         end
 
-        # FIXME: extract to command object
+        # FIXME: extract to query object
         q = ::Campus.__elasticsearch__.search(
           query: {
             bool: {
